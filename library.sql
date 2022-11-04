@@ -82,7 +82,6 @@ SELECT book.name as name
 FROM book
 LEFT JOIN borrow ON book.id=borrow.id_book
 WHERE NOT borrow.return_date IS NULL;
-VALUES (1,1,NOW());
 -- command to see all books borrowed
 SELECT DISTINCT first_name,last_name, book.name as book_name, borrow_date 
 FROM borrow NATURAL JOIN book NATURAL JOIN patron;
