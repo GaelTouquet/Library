@@ -63,4 +63,4 @@ INSERT INTO borrow (id_patron, id_book, borrow_date)
 VALUES (1,1,NOW());
 -- command to see all books borrowed
 SELECT DISTINCT first_name,last_name, book.name as book_name, borrow_date 
-FROM borrows NATURAL JOIN book NATURAL JOIN customer;
+FROM borrow NATURAL JOIN book NATURAL JOIN customer;
