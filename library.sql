@@ -45,11 +45,11 @@ VALUES ('Franck','Michel'),
 -- try some borrows
 INSERT INTO borrow (id_patron, id_book, borrow_date)
 VALUES (1,1,NOW()),
-(2,3,NOW(),NULL),
-(3,2,NOW(),NULL),
-(3,4,NOW(),NULL),
-(5,2,NOW(),NULL),
-(5,1,NOW(),NULL);
+(2,3,NOW()),
+(3,2,NOW()),
+(3,4,NOW()),
+(5,2,NOW()),
+(5,1,NOW());
 -- test if a patron can borrow several book
 INSERT INTO borrow (id_patron, id_book, borrow_date)
 VALUES (1,3,NOW());
