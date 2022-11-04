@@ -21,25 +21,46 @@ CREATE TABLE borrow (
 -- test case, dummy values
 INSERT INTO book (name)
 VALUES ('Dune'),
-('Lanfeust'),
-('Harry Potter'),
-('Lhistoire pour les nuls');
+    ('Lanfeust'),
+    ('Harry Potter'),
+    ('Lhistoire pour les nuls');
 INSERT INTO patron (first_name, last_name)
-VALUES ('Franck','Michel'),
-('Jean','Valjean'),
-('Francis','Autant'),
-('Machin','Bidule');
+VALUES ('Franck', 'Michel'),
+    ('Jean', 'Valjean'),
+    ('Francis', 'Autant'),
+    ('Machin', 'Bidule');
 -- try some borrows
 INSERT INTO borrow (id_patron, id_book, borrow_date)
-VALUES (1,1,NOW());
+VALUES (1, 1, NOW());
 -- test if a patron can borrow several book
 INSERT INTO borrow (id_patron, id_book, borrow_date)
-VALUES (1,3,NOW());
+VALUES (1, 3, NOW());
 -- next shouldn't work because book is already borrowed
 INSERT INTO borrow (id_patron, id_book, borrow_date)
-VALUES (3,1,NOW());
+VALUES (3, 1, NOW());
 -- try to give a book back
-UPDATE borrow SET return_date = NOW() WHERE id=1; 
+UPDATE borrow
+SET return_date = NOW()
+WHERE id = 1;
+-- givin another book back
+UPDATE borrow
+SET return_date = NOW()
+WHERE id = 2;
 -- try for someone else to take the book that was given back
 INSERT INTO borrow (id_patron, id_book, borrow_date)
-VALUES (1,1,NOW());
+VALUES (1, 1, NOW());
+------ Commands
+-- how many books are out?
+SELECT COUNT(*)
+FROM borrow
+WHERE borrow.return_date IS NULL;
+-- is there un returned books?
+SELECT COUNT(*)>0
+FROM borrow
+WHERE borrow.return_date IS NULL;
+-- list of available books
+SELECT book.name as name
+, borrow.return_date
+FROM book
+LEFT JOIN borrow ON book.id=borrow.id_book
+WHERE NOT borrow.return_date IS NULL;
